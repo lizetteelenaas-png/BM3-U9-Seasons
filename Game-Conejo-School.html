@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>📘 Unit 2 My Community 🖍️</title>
+<title>📘 Unit 9 Seasons 🖍️</title>
 <style>
   body {
     margin: 0;
@@ -210,8 +210,8 @@
 <body>
 
 <div class="start-screen" id="startScreen">
-  <h1> 📘 Unit 2 My Community 🖍️</h1>
-  <p> Help Kevin the Cat learn about her Community!</p>
+  <h1> 📘 Unit 9 Seasons 🖍️</h1>
+  <p> Help Kevin the Cat learn about the Seasons!</p>
   <button class="start-button" onclick="startGame()">Start Game</button>
   <audio id="bgMusic" loop>
     <source src="music.mp3" type="audio/mpeg">
@@ -228,45 +228,45 @@
 </div>
 
 <div class="targets" id="targetArea">
-  <div class="dropzone" data-match="fire station"><img src="fire-station.jpg" alt="fire station">
-      <button class="play-button" onclick="playAudio('fire stationAudio')">▶️</button>
-      <audio id="fire stationAudio" src="fire station.mp3"></audio></div>
+  <div class="dropzone" data-match="autumm"><img src="autumm.jpg" alt="autumm">
+      <button class="play-button" onclick="playAudio('autummAudio')">▶️</button>
+      <audio id="autummAudio" src="autumm.mp3"></audio></div>
   
-  <div class="dropzone" data-match="hospital"><img src="hospital.jpg" alt="hospital">
-      <button class="play-button" onclick="playAudio('hospitalAudio')">▶️</button>
-    <audio id="hospitalAudio" src="hospital.mp3"></audio></div>
+  <div class="dropzone" data-match="spring"><img src="spring.jpg" alt="spring">
+      <button class="play-button" onclick="playAudio('springAudio')">▶️</button>
+    <audio id="springAudio" src="spring.mp3"></audio></div>
   
-  <div class="dropzone" data-match="park"><img src="park.jpg" alt="park">
-      <button class="play-button" onclick="playAudio('parkAudio')">▶️</button>
-      <audio id="parkAudio" src="park.mp3"></audio></div>
+  <div class="dropzone" data-match="winter"><img src="winter.jpg" alt="winter">
+      <button class="play-button" onclick="playAudio('winterAudio')">▶️</button>
+      <audio id="winterAudio" src="winter.mp3"></audio></div>
   
-  <div class="dropzone" data-match="police station"><img src="police-station.jpg" alt="police station">
-      <button class="play-button" onclick="playAudio('police stationAudio')">▶️</button>
-      <audio id="police stationAudio" src="police station.mp3"></audio></div>
+  <div class="dropzone" data-match=summer"><img src="summer.jpg" alt="summer">
+      <button class="play-button" onclick="playAudio('summerAudio')">▶️</button>
+      <audio id="summerAudio" src="summer.mp3"></audio></div>
   
-  <div class="dropzone" data-match="restaurant"><img src="restaurant.jpg" alt="restaurant">
-      <button class="play-button" onclick="playAudio('restaurantAudio')">▶️</button>
-      <audio id="restaurantAudio" src="restaurant.mp3"></audio></div>
+  <div class="dropzone" data-match="play with snow"><img src="play.jpg" alt="play with snow">
+      <button class="play-button" onclick="playAudio('play with snowAudio')">▶️</button>
+      <audio id="play with snowAudio" src="play.mp3"></audio></div>
   
-  <div class="dropzone" data-match="supermarket"><img src="supermarket.jpg" alt="supermarket">
-      <button class="play-button" onclick="playAudio('supermarketAudio')">▶️</button>
-      <audio id="supermarketAudio" src="supermarket.mp3"></audio></div>
+  <div class="dropzone" data-match="leaves falling"><img src="leaves.jpg" alt="leaves falling">
+      <button class="play-button" onclick="playAudio('leaves fallingAudio')">▶️</button>
+      <audio id="leaves fallingAudio" src="leaves falling.mp3"></audio></div>
   
-  <div class="dropzone" data-match="doctor"><img src="doctor.jpg" alt="doctor">
-      <button class="play-button" onclick="playAudio('doctorAudio')">▶️</button>
-      <audio id="doctorAudio" src="doctor.mp3"></audio></div>
+  <div class="dropzone" data-match="build a snowman"><img src="build.jpg" alt="build a snowman">
+      <button class="play-button" onclick="playAudio('build a snowmanAudio')">▶️</button>
+      <audio id="build a snowmanAudio" src="build.mp3"></audio></div>
   
-  <div class="dropzone" data-match="fire fighter"><img src="fire-fighter.jpg" alt="fire fighter">
-      <button class="play-button" onclick="playAudio('fire fighterAudio')">▶️</button>
-      <audio id="fire fighterAudio" src="firefighter.mp3"></audio></div>
+  <div class="dropzone" data-match="fly a kite"><img src="fly.jpg" alt="fly a kite">
+      <button class="play-button" onclick="playAudio('fly a kiteAudio')">▶️</button>
+      <audio id="fly a kiteAudio" src="fly.mp3"></audio></div>
   
-  <div class="dropzone" data-match="police officer"><img src="police-officer.jpg" alt="police officer">
-      <button class="play-button" onclick="playAudio('police officerAudio')">▶️</button>
-      <audio id="police officerAudio" src="police officer.mp3"></audio></div>
+  <div class="dropzone" data-match="volcano"><img src="volcano.jpg" alt="volcano">
+      <button class="play-button" onclick="playAudio('volcanoAudio')">▶️</button>
+      <audio id="volcanoAudio" src="volcano.mp3"></audio></div>
   
-  <div class="dropzone" data-match="dinosaur"><img src="dinosaur.jpg" alt="dinosaur">
-      <button class="play-button" onclick="playAudio('dinosaurAudio')">▶️</button>
-      <audio id="dinosaurAudio" src="dinosaur.mp3"></audio></div>
+  <div class="dropzone" data-match="video"><img src="video.jpg" alt="video">
+      <button class="play-button" onclick="playAudio('videoAudio')">▶️</button>
+      <audio id="videoAudio" src="video.mp3"></audio></div>
 </div>
   
   <div class="feedback-line" id="feedbackLine"></div>
@@ -278,7 +278,7 @@
 </div>
 
 <script>
-let emotions=["fire station","hospital","park","police station","restaurant","supermarket","doctor","fire fighter","police officer","dinosaur"];
+let emotions=["autumm","spring","winter","summer","play with snow","leaves falling","build a snowman","fly a kite","volcano","video"];
 const bunny=document.getElementById("bunny");
 const egg=document.getElementById("egg");
 const feedbackLine=document.getElementById("feedbackLine");
