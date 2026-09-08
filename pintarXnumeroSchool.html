@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title> 🎨 Unit 2 My Community</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background: #f5f5f5;
+    }
+
+    /* Pantalla de inicio */
+    #start-screen {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: linear-gradient(135deg, #ff9ac9, #6aa6ff); 
+        color: white;
+        text-align: center;
+        text-shadow: 1px 1px 2px #333;
+    }
+    #start-screen h1 {
+        font-size: 48px;
+        margin-bottom: 20px;
+        font-weight: bold;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    #start-screen h2 {
+        font-size: 24px;
+        font-weight: normal;
+        margin-top: 10px;
+        color: white;
+        text-shadow: 1px 1px 2px #333;
+    }
+
+    /* Paleta de colores */
+    #palette {
+        display: flex;
+		flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        margin: 20px auto;
+    }
+    .color-btn {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        border: 3px solid #333;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-weight: bold;
+    }
+
+    /* Área de juego */
+    #game-area {
+        display: none;              /* oculto al inicio */
+        min-height: 100vh;          /* ocupa toda la pantalla */
+        width: 100%;
+        max-width: 800px;
+        margin: 20px auto;
+        background: linear-gradient(135deg, #ffe169, #b573ff);
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        text-align: center;
+        color: white;
+    }
+
+    svg {
+        width: 100%;    
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+        margin: auto;   
+       /* display: none;  ocultos al inicio */
+    }
+	.cover-teddy {
+  display: block;
+  margin: 20px auto 0 auto; /* espacio arriba y centrado */
+  width: 250px;
+}
+
+    /* Botones */
+    #restart-btn {
+        margin-top: 20px;
+        padding: 14px 28px;
+        font-size: 20px;
+        cursor: pointer;
+        background: linear-gradient(45deg, #ffe169, #ff9ac9);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-weight: bold;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        transition: transform 0.2s, background 0.3s;
+        display: none; /* oculto al inicio */
+    }
+    #restart-btn:hover {
+        transform: scale(1.05);
+        background: linear-gradient(45deg, #ff9ac9, #ffe169);
+    }
+    #start-btn {
+        padding: 14px 28px;
+        font-size: 20px;
+        cursor: pointer;
+        background: linear-gradient(45deg, #ffe169, #ff9ac9);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-weight: bold;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        transition: transform 0.2s, background 0.3s;
+    }
+
+    /* Mensaje final */
+    #finish-message {
+        display: none;
+        font-size: 24px;
+        color: green;
+        margin-top: 20px;
+        animation: fadeInOut 3s ease;
+    }
+
+    @keyframes fadeInOut {
+      0% {opacity:0;}
+      20% {opacity:1;}
+      80% {opacity:1;}
+      100% {opacity:0;}
+    }
+</style>
+</head>
+<body>
+
+<!-- PANTALLA DE INICIO -->
+<div id="start-screen">
+    <h1>🎨 Unit 2 My Community </h1>
+	<h2> Click and color </h2>
+    <button id="start-btn">Start Game</button>
+	<img src="gatito.png" alt="teddy bear" class="cover-teddy">
+</div>
+	
+<div id="game-area" style="display:none;">
+<h1 id="title" style="display:none;">🎨 Color the Picture</h1>
+
+<!-- PALETA DE COLORES -->
+<div id="palette">
+    <div class="color-btn" data-color="1" style="background:#0F1652;">1</div> 
+    <div class="color-btn" data-color="2" style="background:#77BBD1;">2</div> 
+    <div class="color-btn" data-color="3" style="background:#5B6A70;">3</div> 
+    <div class="color-btn" data-color="4" style="background:#A2D4EB;">4</div> 
+    <div class="color-btn" data-color="5" style="background:#8F5628;">5</div> 
+    <div class="color-btn" data-color="6" style="background:#EDDF1A;">6</div> 
+    <div class="color-btn" data-color="7" style="background:#FF0000;">7</div>
+</div>
+
+<!-- ÁREA DEL JUEGO -->
+       <div id="svg1" class="svg-container">
+		<svg id="Capa_1" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 539.85 354.81">
+  <g>
+    <polygon points="159.84 45.81 512.84 81.81 495.84 45.81 179.28 3.81 159.84 45.81" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="7"/>
+    <line x1="186.33" y1="48.51" x2="206.75" y2="7.45" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="7"/>
+    <line x1="238" y1="11.6" x2="219.84" y2="51.93" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="7"/>
+    <line x1="258.34" y1="14.3" x2="238" y2="54.72" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="7"/>
+    <line x1="285.1" y1="17.85" x2="263.78" y2="56.41" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="7"/>
+    <line x1="309.07" y1="21.03" x2="292.84" y2="60.16" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="7"/>
+    <line x1="336.34" y1="24.65" x2="321.84" y2="62.33" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="7"/>
+    <line x1="364.06" y1="27.98" x2="345.85" y2="64.78" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="7"/>
+    <line x1="389.98" y1="31.76" x2="371.78" y2="67.42" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="7"/>
+    <line x1="413.84" y1="34.93" x2="397.91" y2="70.09" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="7"/>
+    <line x1="439.76" y1="38.37" x2="423.84" y2="72.73" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="7"/>
+    <line x1="460.92" y1="41.18" x2="447.8" y2="75.18" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="7"/>
+    <line x1="478.35" y1="43.49" x2="471.86" y2="77.63" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="7"/>
+  </g>
+  <g id="_7" data-name="7">
+    <path data-num="7" d="M224.23,379.1A212.68,212.68,0,0,1,150,377c1.13-23.95-16-43.71-36-46-22.92-2.63-46.79,18.07-46,46a37,37,0,0,1-18,8,38,38,0,0,1-26-6c-5.92-17.94-15.84-56-5-96,3.8-14,8.31-30.68,23-42,12.62-9.72,19.92-5.62,27-15,10.73-14.21,5.33-38.66,1.06-58-3.43-15.56-6-17.21-4.06-22,2.66-6.6,11-12.21,76-16,40.62-2.37,46.13-.69,51,3,7.29,5.54,14.38,16.54,12.47,71.88-2.39,69.26-19.87,92-8.47,129.12C203.41,354.9,215.37,369.87,224.23,379.1Z" transform="translate(-13.16 -74.19)" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <text transform="translate(33.64 197.35)" font-size="12" fill="#1d1d1b" font-family="MyriadPro-Regular, Myriad Pro">7</text>
+    <text transform="translate(179.28 136.67)" font-size="12" fill="#1d1d1b" font-family="MyriadPro-Regular, Myriad Pro">7</text>
+  </g>
+  <g>
+    <path d="M94.15,334.34A38.11,38.11,0,0,1,114,331c18.42,2,28.18,17.61,29.94,20.56A45.09,45.09,0,0,1,150,377l30,4q-3.5-126-7-252.09l-35.61,2.46-43.24,3Z" transform="translate(-13.16 -74.19)" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <ellipse cx="142.88" cy="180.62" rx="8.04" ry="4.81" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+  </g>
+  <g id="_4" data-name="4">
+    <path data-num="4" d="M159,242a149.2,149.2,0,0,1-31,2,148,148,0,0,1-19-2,135.93,135.93,0,0,1,0-74,55,55,0,0,1,50,0,137.19,137.19,0,0,1,0,74Z" transform="translate(-13.16 -74.19)" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <text transform="translate(120.82 125.31)" font-size="12" fill="#1d1d1b" font-family="MyriadPro-Regular, Myriad Pro">4</text>
+  </g>
+  <g id="_7-2" data-name="7">
+    <path data-num="7" d="M196,381.37c24.11.57,49.47.51,76-.37,23.66-.79,46.35-2.17,68-4,4.4-19.56,22.37-32.67,41-31,16.33,1.46,30.33,14,34,31h12c2-17.48,12.13-32.35,26-37,20-6.71,47.58,7.89,55,37a190.6,190.6,0,0,0,21,1c6.48-.05,12.5-.43,18-1a50.81,50.81,0,0,0,0-44c-5.6-4.28-10.46-5.61-14-6-6.76-.74-11.81,1.65-14-1-1.76-2.13-.36-5.95,0-7,4.32-12.66-2.34-35.15,0-94,1.16-29.15,3.52-41.93-4.93-59-2-4-4.53-9.18-9.07-14-19.6-20.64-53.1-9.14-112-8-26.32.51-47.92-1.24-82-4-28.62-2.32-54.15-5.38-87,3a187.77,187.77,0,0,0-21.41,6.86,350.25,350.25,0,0,1,2.88,55c-1.13,43-9.63,62.32-12.29,103.12A360.15,360.15,0,0,0,196,381.37Z" transform="translate(-13.16 -74.19)" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <text transform="translate(252.68 278.93)" font-size="12" fill="#1d1d1b" font-family="MyriadPro-Regular, Myriad Pro">7</text>
+    <text transform="translate(375.8 121.07)" font-size="12" fill="#1d1d1b" font-family="MyriadPro-Regular, Myriad Pro">7</text>
+  </g>
+  <g id="_7-3" data-name="7">
+    <polygon data-num="7" points="183.15 204.85 186.33 185.42 505.36 190.81 505.36 209.27 183.15 204.85" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <text transform="translate(285.1 199.79)" font-size="12" fill="#1d1d1b" font-family="MyriadPro-Regular, Myriad Pro">7</text>
+  </g>
+  <polygon points="180.01 238.32 183.15 204.85 505.36 209.96 507.33 238.32 180.01 238.32" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <g id="_3" data-name="3">
+    <ellipse data-num="3" cx="95.84" cy="305.31" rx="41" ry="48.5" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <circle cx="96.84" cy="305.31" r="14.5" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <text transform="translate(120.82 307.55)" font-size="12" fill="#1d1d1b" font-family="MyriadPro-Regular, Myriad Pro">3</text>
+  </g>
+
+  <g id="_3-2" data-name="3">
+    <circle data-num="3" cx="362.84" cy="312.81" r="41" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <circle cx="364.06" cy="312.81" r="15.91" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <text transform="translate(348.15 290.81)" font-size="12" fill="#1d1d1b" font-family="MyriadPro-Regular, Myriad Pro">3</text>
+  </g>
+  <g id="_3-3" data-name="3">
+    <ellipse data-num="3" cx="454.84" cy="306.98" rx="41" ry="46.83" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <circle cx="455.84" cy="307.55" r="16.91" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <text transform="translate(455.84 278.93)" font-size="12" fill="#1d1d1b" font-family="MyriadPro-Regular, Myriad Pro">3</text>
+  </g>
+  <g id="_4-2" data-name="4">
+    <rect data-num="4" x="219.84" y="98.81" width="77" height="53" rx="12" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <text transform="translate(258.34 128.87)" font-size="12" fill="#1d1d1b" font-family="MyriadPro-Regular, Myriad Pro">4</text>
+  </g>
+  <g id="_6" data-name="6">
+    <polygon data-num="6" points="189.06 169.93 505.36 169.93 505.36 190.81 186.33 185.42 189.06 169.93" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <text transform="translate(407.8 182.94)" font-size="12" fill="#1d1d1b" font-family="MyriadPro-Regular, Myriad Pro">6</text>
+  </g>
+ <g id="_6-2" data-name="6">
+    <path data-num="6" d="M123.58,117.81c-1.55-12.68,6.93-22,13.7-22.11s15.63,9,14.44,21.73a19.17,19.17,0,0,0-28.14.38Z" transform="translate(-13.16 -74.19)" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <text transform="translate(120.82 32.56)" font-size="12" fill="#1d1d1b" font-family="MyriadPro-Regular, Myriad Pro">6</text>
+  </g>
+
+<g id="_7-4" data-name="7">
+    <path data-num="7" d="M118.38,131.66a19.48,19.48,0,0,1,38.87-2.43Z" transform="translate(-13.16 -74.19)" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <text transform="translate(121.22 52.51)" font-size="12" fill="#1d1d1b" font-family="MyriadPro-Regular, Myriad Pro">7</text>
+  </g>
+
+</svg>
+	</div>
+	
+	<div id="svg3" class="svg-container">
+		<svg id="Capa_1" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 679.92 552.5">
+  <g id="_1" data-name="1">
+    <rect data-num="1" x="1" y="462.9" width="551.43" height="68.57" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <text transform="translate(73.68 497.19)" font-size="12" fill="#1d1d1b" font-family="MyriadPro-Regular, Myriad Pro">1</text>
+    <text transform="translate(456.47 499.43)" font-size="12" fill="#1d1d1b" font-family="MyriadPro-Regular, Myriad Pro">1</text>
+  </g>
+  <g id="_4" data-name="4">
+    <rect data-num="4" x="402.95" y="69.57" width="38.1" height="55.24" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <text transform="translate(418.64 81.95)" font-size="12" fill="#1d1d1b" font-family="MyriadPro-Regular, Myriad Pro">4</text>
+  </g>
+  <g id="_2" data-name="2">
+    <rect data-num="2" x="9.57" y="42" width="533.33" height="113.33" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <text transform="translate(15.29 78.14)" font-size="12" fill="#1d1d1b" font-family="MyriadPro-Regular, Myriad Pro">2</text>
+    <text transform="translate(381.96 78.14)" font-size="12" fill="#1d1d1b" font-family="MyriadPro-Regular, Myriad Pro">2</text>
+  </g>
+  <g id="_1-2" data-name="1">
+    <rect x="1" y="154.33" width="551.43" height="86.67" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <text transform="translate(162.74 20.02)" font-size="12" fill="#1d1d1b" font-family="MyriadPro-Regular, Myriad Pro"></text>
+    <text transform="translate(673.76 20.02)" font-size="12" fill="#1d1d1b" font-family="MyriadPro-Regular, Myriad Pro"></text>
+  </g>
+  <g id="_2-2" data-name="2">
+    <rect data-num="2" x="9.57" y="241" width="533.33" height="221.9" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <text transform="translate(402 256.06)" font-size="12" fill="#1d1d1b" font-family="MyriadPro-Regular, Myriad Pro">2</text>
+    <text transform="translate(73.68 259.81)" font-size="12" fill="#1d1d1b" font-family="MyriadPro-Regular, Myriad Pro">2</text>
+  </g>
+  <rect x="32.43" y="59.1" width="53.33" height="75.24" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+  <g id="_4-2" data-name="4">
+    <rect data-num="4" x="41" y="68.62" width="38.1" height="55.24" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="45.76" y1="104.81" x2="52.43" y2="114.33" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="60.05" y1="104.81" x2="65.76" y2="114.33" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="41" y1="87.67" x2="79.1" y2="87.67" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="40.05" y1="97.67" x2="78.14" y2="97.67" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <text transform="translate(54.51 81.95)" font-size="12" fill="#1d1d1b" font-family="MyriadPro-Regular, Myriad Pro">4</text>
+  </g>
+  <rect x="107.19" y="59.1" width="53.33" height="75.24" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+  <g id="_4-3" data-name="4">
+    <rect data-num="4" x="115.76" y="68.62" width="38.1" height="55.24" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="120.52" y1="104.81" x2="127.19" y2="114.33" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="134.81" y1="104.81" x2="140.52" y2="114.33" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="115.76" y1="87.67" x2="153.86" y2="87.67" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="114.81" y1="97.67" x2="152.9" y2="97.67" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <text transform="translate(133.86 81.95)" font-size="12" fill="#1d1d1b" font-family="MyriadPro-Regular, Myriad Pro">4</text>
+  </g>
+  <rect x="176.94" y="60.05" width="53.33" height="75.24" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+  <rect x="250.05" y="60.05" width="53.33" height="75.24" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+  <rect x="320.22" y="60.05" width="53.33" height="75.24" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+  <g id="_4-4" data-name="4">
+    <rect data-num="4" x="185.51" y="69.57" width="38.1" height="55.24" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <text transform="translate(203.61 81.95)" font-size="12" fill="#1d1d1b" font-family="MyriadPro-Regular, Myriad Pro">4</text>
+    <line x1="190.28" y1="105.76" x2="196.94" y2="115.29" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="204.56" y1="105.76" x2="210.28" y2="115.29" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="185.51" y1="88.62" x2="223.61" y2="88.62" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="184.56" y1="98.62" x2="222.66" y2="98.62" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+  </g>
+  <g id="_4-5" data-name="4">
+    <rect data-num="4" x="258.62" y="69.57" width="38.1" height="55.24" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <text transform="translate(274.7 81.95)" font-size="12" fill="#1d1d1b" font-family="MyriadPro-Regular, Myriad Pro">4</text>
+    <line x1="263.38" y1="105.76" x2="270.05" y2="115.29" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="277.67" y1="105.76" x2="283.38" y2="115.29" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="258.62" y1="88.62" x2="296.71" y2="88.62" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="257.67" y1="98.62" x2="295.76" y2="98.62" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+  </g>
+  <g id="_4-6" data-name="4">
+    <rect data-num="4" x="328.79" y="69.57" width="38.1" height="55.24" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line data-num="4" x1="333.56" y1="105.76" x2="340.22" y2="115.29" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="347.84" y1="105.76" x2="353.56" y2="115.29" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="328.79" y1="88.62" x2="366.89" y2="88.62" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="327.84" y1="98.62" x2="365.94" y2="98.62" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <text transform="translate(346.09 81.95)" font-size="12" fill="#1d1d1b" font-family="MyriadPro-Regular, Myriad Pro">4</text>
+  </g>
+  <rect x="394.38" y="60.05" width="53.33" height="75.24" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+  <rect x="463.5" y="59.1" width="53.33" height="75.24" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+  <g id="letras">
+    <path d="M52.51,183.36v42.48h6.67V210a15,15,0,0,0,15.22-.72c5.38-3.75,5.88-10.06,6-11.52,0-.49.53-8.22-5-13.44S60.31,178.47,52.51,183.36Z" transform="translate(-6.75 -8.66)" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <path d="M133.94,183.36v42.48h25.72v-7.92H144.48l-.06-34.56Z" transform="translate(-6.75 -8.66)" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <rect x="160.52" y="174.7" width="8.89" height="42.48" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <path d="M214.17,195.6l5.91-6.48a21,21,0,0,0-36.39,12.24c-1.88,11.06,4.09,21.63,13.59,25.2,7.6,2.85,16.49.86,22.8-5l-5.91-7.92a12.42,12.42,0,0,1-14,3.36c-5.29-2.26-7.24-7.82-7.2-12,0-4.49,2.41-9.83,7.68-12A12.73,12.73,0,0,1,214.17,195.6Z" transform="translate(-6.75 -8.66)" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <polygon points="222.66 174.71 222.66 217.19 250.05 217.19 250.05 209.99 230.28 209.99 230.28 200.63 243.57 200.63 243.57 192.71 230.28 192.71 230.28 180.47 250.05 180.47 250.05 174.71 222.66 174.71" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <path d="M59.18,202.93a9.66,9.66,0,0,0,11.38.11,9,9,0,0,0-.48-14.4,9.49,9.49,0,0,0-10.9.48Z" transform="translate(-6.75 -8.66)" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <path d="M300.72,193.44l2.74-5.76c-.69-.61-7.85-6.71-16.06-4.32a14.94,14.94,0,0,0-6.12,3.6,10.68,10.68,0,0,0,1.71,16.2c8.93,3.32,14.66,7.9,14.13,11.52a5.14,5.14,0,0,1-2.52,3.24c-3,1.63-7.68.19-11.52-4l-4,8.28c.49.56,5.59,6.21,13.32,5.4a15.67,15.67,0,0,0,10.07-5.4c1.46-3,3.16-7.79,1.45-12.24-3.41-8.88-17.9-10.14-17.64-15.48.11-2.3,2.88-3.77,3.24-4C292.65,189,297.05,190.08,300.72,193.44Z" transform="translate(-6.75 -8.66)" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <polygon points="303.38 174.71 330.33 174.71 330.33 182.99 320.22 182.99 320.22 217.19 313.05 217.19 313.05 182.99 303.38 182.63 303.38 174.71" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <path d="M338.16,225.48l19.29-43.17,19.95,43.53H368l-2.86-7.14-12.75-.52L347,225.84Z" transform="translate(-6.75 -8.66)" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <path d="M354,209.64h9.72l-4.87-11.16Q356.44,204.06,354,209.64Z" transform="translate(-6.75 -8.66)" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <path d="M481.08,182.64l.72,43.2h8.45V200.28L508,226l6.48.12V183.36h-7.8v25.2l-17.49-26.07Z" transform="translate(-6.75 -8.66)" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <polygon points="370.65 174.16 397.6 174.16 397.6 182.44 387.49 182.44 387.49 216.65 380.32 216.65 380.32 182.44 370.65 182.09 370.65 174.16" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <rect x="406.61" y="174.16" width="8.89" height="42.48" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <ellipse cx="98.87" cy="196.36" rx="19.78" ry="22.71" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <ellipse cx="99.26" cy="195.76" rx="13.5" ry="15.66" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <ellipse cx="445.27" cy="195.4" rx="19.78" ry="22.71" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <ellipse cx="445.66" cy="194.81" rx="13.5" ry="15.66" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+  </g>
+  <rect x="222.66" y="256.06" width="110.9" height="206.85" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+  <g id="_5" data-name="5">
+    <rect data-num="5" x="230.28" y="267.6" width="93.93" height="195.31" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <text transform="translate(252.07 367.71) scale(0.99 1)" font-size="12.18" fill="#1d1d1b" font-family="MyriadPro-Regular, Myriad Pro">5</text>
+  </g>
+  <circle cx="310.12" cy="375.84" r="6.74" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+  <g id="_1-3" data-name="1">
+    <path data-num="1" d="M284.91,377.76a24.5,24.5,0,0,1-9.21,14.4c-9.15,7-20.09,6-21.9,5.76a25,25,0,0,1,6.49,10.8c2.79,10.28-4.1,16.34-2.43,23.76C259,437.39,264,444,283.3,449.76c21.65-4,28.16-10,29.7-15.12,2.24-7.44-5.45-14.69-2.43-28.08a33,33,0,0,1,3.3-8.64,35.68,35.68,0,0,1-19.52-7.2A28.75,28.75,0,0,1,284.91,377.76Z" transform="translate(-6.75 -8.66)" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <text transform="translate(288.21 396.43)" font-size="12" fill="#1d1d1b" font-family="MyriadPro-Regular, Myriad Pro">1</text>
+  </g>
+  <g>
+    <rect x="239.25" y="275.71" width="78.6" height="78.6" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="239.25" y1="276.24" x2="317.85" y2="354.84" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="317.85" y1="276.24" x2="239.25" y2="354.84" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="250.41" y1="276.24" x2="317.85" y2="344.03" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="261.57" y1="276.24" x2="317.85" y2="332.98" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="271.58" y1="276.24" x2="317.85" y2="321.26" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="280.29" y1="275.71" x2="317.85" y2="311.5" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="289.71" y1="274.81" x2="316.86" y2="301.42" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="317.85" y1="293.61" x2="299.07" y2="274.81" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="239.25" y1="286.46" x2="308.46" y2="353.48" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="239.25" y1="295.89" x2="297.93" y2="354.84" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="239.25" y1="305.74" x2="288.21" y2="354.84" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="239.25" y1="315.54" x2="280.29" y2="354.84" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="239.25" y1="325.36" x2="271.58" y2="354.84" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="239.25" y1="335.19" x2="261.57" y2="354.84" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <polyline points="239.25 343.91 250.41 354.84 317.85 286.46" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="317.85" y1="281.98" x2="310.12" y2="275.71" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <path d="M255,363.49" transform="translate(-6.75 -8.66)" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="317.85" y1="295.89" x2="261.57" y2="354.84" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="316.86" y1="307.54" x2="271.58" y2="354.84" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="317.85" y1="315.54" x2="281.35" y2="354.37" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="316.86" y1="324.73" x2="288.21" y2="354.84" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="317.85" y1="332.18" x2="296.75" y2="355.64" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="317.85" y1="343.01" x2="307.01" y2="355.09" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="307.01" y1="275.95" x2="239.57" y2="344.32" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="295.53" y1="276.27" x2="239.25" y2="335.22" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="284.21" y1="276.1" x2="238.93" y2="323.4" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="274.59" y1="275.71" x2="239.25" y2="313.3" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="264.56" y1="275.57" x2="239.07" y2="300.67" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="248.35" y1="275.04" x2="239.27" y2="283.91" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="254.98" y1="275.45" x2="239.29" y2="290.92" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+  </g>
+  <polygon points="346.09 444.52 346.09 267.6 518.23 267.6 517.27 444.52 346.09 444.52" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+  <g id="_4-7" data-name="4">
+    <rect data-num="4" x="358.43" y="276.24" width="151.18" height="157.71" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="366.09" y1="335.87" x2="379.43" y2="360.87" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="376.57" y1="330.1" x2="387.34" y2="351.95" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="398.67" y1="276.24" x2="398.67" y2="433.94" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="406.28" y1="276.24" x2="406.28" y2="433.94" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="402.43" y1="276.24" x2="402.43" y2="433.94" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="418.64" y1="335.87" x2="431.97" y2="360.87" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="429.12" y1="330.1" x2="439.89" y2="351.95" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="451.21" y1="276.24" x2="451.21" y2="433.94" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="456.47" y1="276.24" x2="456.47" y2="433.94" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="460.33" y1="276.24" x2="460.33" y2="433.94" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="468.8" y1="338.75" x2="482.14" y2="363.75" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="479.28" y1="332.98" x2="490.05" y2="354.84" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <text transform="translate(373.56 307.55)" font-size="12" fill="#1d1d1b" font-family="MyriadPro-Regular, Myriad Pro">4</text>
+    <text transform="translate(422 301.43)" font-size="12" fill="#1d1d1b" font-family="MyriadPro-Regular, Myriad Pro">4</text>
+    <text transform="translate(479.28 301.43)" font-size="12" fill="#1d1d1b" font-family="MyriadPro-Regular, Myriad Pro">4</text>
+  </g>
+  <polygon points="32.43 444.52 32.43 267.6 204.56 267.6 203.61 444.52 32.43 444.52" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+  <g id="_4-8" data-name="4">
+    <rect data-num="4" x="44.76" y="276.24" width="151.18" height="157.71" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="52.43" y1="335.87" x2="65.76" y2="360.87" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="62.9" y1="330.1" x2="73.68" y2="351.95" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="85" y1="276.24" x2="85" y2="433.94" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="92.62" y1="276.24" x2="92.62" y2="433.94" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="88.76" y1="276.24" x2="88.76" y2="433.94" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="104.97" y1="335.87" x2="118.31" y2="360.87" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="115.45" y1="330.1" x2="126.22" y2="351.95" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="137.55" y1="276.24" x2="137.55" y2="433.94" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="142.81" y1="276.24" x2="142.81" y2="433.94" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="146.67" y1="276.24" x2="146.67" y2="433.94" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="155.14" y1="338.75" x2="168.47" y2="363.75" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="165.61" y1="332.98" x2="176.39" y2="354.84" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <text transform="translate(54.33 304.81)" font-size="12" fill="#1d1d1b" font-family="MyriadPro-Regular, Myriad Pro">4</text>
+    <text transform="translate(171 301.43)" font-size="12" fill="#1d1d1b" font-family="MyriadPro-Regular, Myriad Pro">4</text>
+    <text transform="translate(114.81 307.55)" font-size="12" fill="#1d1d1b" font-family="MyriadPro-Regular, Myriad Pro">4</text>
+  </g>
+  <path data-num="3" d="M172.51,556.32V540.13l18.41-13.69-.36-18.36,16.56-11.52.36-16.2,13-8.8H347.52l13,9.52-.36,15.84,14.4,11.52-.36,16.2,16.2,14.76,0,17.07c-36.2,2.47-74.95,3.87-116,3.66C238.61,560,204.58,558.56,172.51,556.32Z" transform="translate(-6.75 -8.66)" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+  <path d="M207.48,480.36A761.74,761.74,0,0,0,285.6,484c26.5-.14,51.07-1.67,73.41-4" transform="translate(-6.75 -8.66)" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+  <path d="M374.52,508.44a812.34,812.34,0,0,1-91.8,5,812.92,812.92,0,0,1-92.16-5.4" transform="translate(-6.75 -8.66)" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+  <path d="M172.51,540.13c33.82,2.12,69.78,3.33,107.69,3.23,38.83-.1,75.63-1.56,110.16-4" transform="translate(-6.75 -8.66)" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+  <path d="M190.92,526.44c28.79,1.18,59,1.73,90.36,1.44,32.34-.29,63.34-1.45,92.88-3.24" transform="translate(-6.75 -8.66)" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+  <path d="M207.12,496.56q36.24,1.62,75.24,1.8,40.32.12,77.76-1.44" transform="translate(-6.75 -8.66)" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+  <text transform="translate(275.62 502.13)" font-size="12" fill="#1d1d1b" font-family="MyriadPro-Regular, Myriad Pro">3</text>
+  <text transform="translate(264.56 546.9)" font-size="12" fill="#1d1d1b" font-family="MyriadPro-Regular, Myriad Pro">3</text>
+  <g id="_1-4" data-name="1">
+    <rect data-num="1" x="1" y="1" width="551.43" height="40" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <text transform="translate(120.84 21)" font-size="12" fill="#1d1d1b" font-family="MyriadPro-Regular, Myriad Pro">1</text>
+    <text transform="translate(384.12 21)" font-size="12" fill="#1d1d1b" font-family="MyriadPro-Regular, Myriad Pro">1</text>
+    <text transform="translate(254.98 21)" font-size="12" fill="#1d1d1b" font-family="MyriadPro-Regular, Myriad Pro">1</text>
+  </g>
+  <g id="_6" data-name="6">
+    <polygon data-num="6" points="289.97 424.93 278.3 418.79 266.64 424.93 268.87 411.94 259.43 402.74 272.47 400.84 278.3 389.02 284.14 400.84 297.18 402.74 287.74 411.94 289.97 424.93" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <text transform="translate(275.79 411.85)" font-size="12" fill="#1d1d1b" font-family="MyriadPro-Regular, Myriad Pro">6</text>
+  </g>
+  <g id="_4-9" data-name="4">
+    <rect data-num="4" x="472.44" y="68.62" width="38.1" height="55.24" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="477.2" y1="104.81" x2="483.87" y2="114.33" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="491.49" y1="104.81" x2="497.2" y2="114.33" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="472.44" y1="87.67" x2="510.53" y2="87.67" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="471.49" y1="97.67" x2="509.58" y2="97.67" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <text transform="translate(489.74 81)" font-size="12" fill="#1d1d1b" font-family="MyriadPro-Regular, Myriad Pro">4</text>
+  </g>
+  <g id="_4-10" data-name="4">
+    <rect data-num="4" x="402.48" y="69.57" width="38.1" height="55.24" fill="#fff" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="407.24" y1="105.76" x2="413.91" y2="115.29" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="421.53" y1="105.76" x2="427.24" y2="115.29" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="402.48" y1="88.62" x2="440.57" y2="88.62" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="401.53" y1="98.62" x2="439.62" y2="98.62" fill="none" stroke="#1d1d1b" stroke-miterlimit="10" stroke-width="2"/>
+    <text transform="translate(419.78 81.95)" font-size="12" fill="#1d1d1b" font-family="MyriadPro-Regular, Myriad Pro">4</text>
+  </g>
+</svg>
+
+	</div>
+	<!-- Mensaje de felicitación -->
+<div id="finish-message">🎉 ¡EXCELLENT, KEEP IT UP! 🎉</div>
+	
+	<!-- ⭐ Botón reinicio -->
+	<button id="restart-btn">Restart</button>
+	</div>
+<script>
+/* ----------------------
+   VARIABLES BÁSICAS
+-----------------------*/
+
+let currentColor = null;
+const svgs = document.querySelectorAll(".svg-container");
+const restartBtn = document.getElementById("restart-btn");
+
+/* ---------------------------------------------
+⭐ Función para mostrar un dibujo aleatorio
+-------------------------------------------------*/
+function mostrarDibujoAleatorio() {
+    svgs.forEach(svg => svg.style.display = "none");
+    const indice = Math.floor(Math.random() * svgs.length);
+    svgs[indice].style.display = "block";
+}
+
+// ⭐ Resetear todos los dibujos a blanco
+function resetSVGs() {
+    document.querySelectorAll("svg [data-num]").forEach(area => {
+        area.setAttribute("fill", "#FFFFFF");
+        area.style.pointerEvents = "auto";
+    });
+}
+
+/* ----------------------
+   BOTÓN INICIAR
+-----------------------*/
+
+document.getElementById("start-btn").addEventListener("click", () => {
+    document.getElementById("start-screen").style.display = "none";
+    document.getElementById("palette").style.display = "flex";
+    document.getElementById("game-area").style.display = "block";
+    document.getElementById("title").style.display = "block";
+	mostrarDibujoAleatorio(); // ⭐ Mostrar uno al azar
+});
+
+/* ----------------------
+   SELECCIONAR COLOR
+-----------------------*/
+
+document.querySelectorAll(".color-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+        currentColor = btn.getAttribute("data-color");
+        document.querySelectorAll(".color-btn").forEach(b => b.style.borderColor = "#333");
+        btn.style.borderColor = "yellow";
+    });
+});
+
+/* ----------------------
+   COLOREAR ÁREAS DEL SVG
+-----------------------*/
+
+function enableSVGPainting() {
+    document.querySelectorAll("svg [data-num]").forEach(area => {
+        area.addEventListener("click", () => {
+            if (!currentColor) return;
+
+            const number = area.getAttribute("data-num");
+
+            if (number === currentColor) {
+                // Obtener color de la paleta
+                const colorBtn = document.querySelector(`.color-btn[data-color='${currentColor}']`);
+                const fillColor = colorBtn.style.background;
+
+                area.setAttribute("fill", fillColor);
+                area.style.pointerEvents = "none"; // evitar recolorear
+				checkIfFinished(); // ⭐ Verificar si ya terminó
+            }
+        });
+    });
+}
+// Activar al cargar
+enableSVGPainting();
+
+// ⭐ Verificar si todas las áreas están coloreadas
+function checkIfFinished() {
+    const areas = document.querySelectorAll("svg [data-num]");
+    const allColored = Array.from(areas).every(a => a.getAttribute("fill") !== null);
+    if (allColored) {
+        terminarJuego();
+    }
+}
+
+// ⭐ Mostrar botón reinicio
+function terminarJuego() {
+    const msg = document.getElementById("finish-message");
+    msg.style.display = "block";
+    restartBtn.style.display = "inline-block";
+    setTimeout(() => {
+        msg.style.display = "none";
+    }, 3000);
+}	
+
+// ⭐ Reinicio del juego
+restartBtn.addEventListener("click", () => {
+    restartBtn.style.display = "none";
+    resetSVGs(); 
+	mostrarDibujoAleatorio();
+	
+});	
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
